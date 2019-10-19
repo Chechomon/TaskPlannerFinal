@@ -39,7 +39,6 @@ class TaskPlaner extends React.Component{
         return(
             <div className="TaskPlanner">
                 <UpperBar/>
-                <p/>
                 {tasks.map((value)=>{
                     return (
                         <div key={"div" + value.description}>
