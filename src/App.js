@@ -1,24 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Login from './Login.js';
+import TaskPlaner from './TaskPlaner';
+
+localStorage.setItem('username', 'admin');
+localStorage.setItem('password', 'admin');
+localStorage.setItem('tasks', JSON.stringify([{
+      "description": "AppBar ",
+      "responsible": "admin",
+      "status": "Ready",
+      "dueDate": 156464645646
+        },{
+      "description": "TaskCards",
+      "responsible": "admin",
+      "status": "Ready",
+      "dueDate": 156464645646
+      },{
+      "description": "Fire base Deploy",
+      "responsible": "admin",
+      "status": "In Progress",
+      "dueDate": 156464645646
+      },
+    ]));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" align="center">
+      
+          <TaskPlaner/>:<Login/>
     </div>
   );
 }
