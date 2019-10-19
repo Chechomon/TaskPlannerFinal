@@ -37,11 +37,25 @@ export default class UpdateTask extends React.Component{
                 var updateTask = {description: this.state.description,
                                     status: this.state.status,
                                     responsible: this.state.responsible,
-                                    dueDate: this.state.dueDate};
+                                    dueDate: this.state.dueDate,
+                                    id: this.state.id};
                 list[i] = updateTask;
                 localStorage.setItem("tasks",JSON.stringify(list));
             }
         }
+        fetch(this.props.host + "/updatetask", {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: this.state.id,
+                description : this.state.description,
+                date: this.state.dueDate,
+                status: this.state.status
+            })
+        }).then(response => window.alert("Task Added succesfully"));
         window.alert("Update succesfully");
     }
 
@@ -52,6 +66,7 @@ export default class UpdateTask extends React.Component{
     }
 
     render(){
+        console.log(this.state);
         return(
           <>
               <UpperBar/>
