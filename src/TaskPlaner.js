@@ -39,6 +39,7 @@ class TaskPlaner extends React.Component{
         return(
             <div className="TaskPlanner">
                 <UpperBar/>
+                <p/>
                 {tasks.map((value)=>{
                     return (
                         <div key={"div" + value.description}>
@@ -46,9 +47,10 @@ class TaskPlaner extends React.Component{
                                      responsible={value.responsible}
                                      dueDate={value.dueDate}
                                      status={value.status}/>
-                                    <p/>
+                                    
                         </div>
                                      )})}
+                <p/>
                 <Link to="/newtask">
                     <Fab style={style} aria-label="Add" color='primary'>
                         <AddIcon />
