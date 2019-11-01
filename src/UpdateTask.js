@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import UpperBar from "./UpperBar";
 import Typography from '@material-ui/core/Typography';
 import {Card} from "@material-ui/core";
@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import axios from "axios";
 
 export default class UpdateTask extends React.Component{
 
@@ -27,7 +28,6 @@ export default class UpdateTask extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
-        var index;
         var list = JSON.parse(localStorage.getItem("tasks"))
         for(var i = 0; i<list.length;i++){
             if(list[i].description===this.state.begin.description &&
@@ -43,20 +43,20 @@ export default class UpdateTask extends React.Component{
                 localStorage.setItem("tasks",JSON.stringify(list));
             }
         }
-        fetch(this.props.host + "/updatetask", {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: this.state.id,
-                description : this.state.description,
-                date: this.state.dueDate,
-                status: this.state.status
-            })
-        }).then(response => window.alert("Task Added succesfully"));
-        window.alert("Update succesfully");
+        axios.put(this.props.host+'/taskplanner/updatetask',{
+            id: this.state.id,
+            description : this.state.description,
+            date: this.state.dueDate,
+            status: this.state.status
+        },{
+            headers:{
+                Authorization: 'Bearer '+localStorage.getItem("accessToken")
+            }
+        }).then(function (response) {
+            window.alert("Task Updated")
+        }).catch(function (error) {
+            console.log(error);
+        })
     }
 
     handleChange(e){
@@ -107,7 +107,6 @@ export default class UpdateTask extends React.Component{
                                   onChange={this.handleChange}
                                   input={
                                       <OutlinedInput
-                                          labelWidth={this.state.labelWidth}
                                           name="status"
                                           id="status"
                                           labelWidth={100}

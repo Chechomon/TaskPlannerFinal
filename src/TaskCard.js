@@ -1,25 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import {CardContent} from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import {Link}  from "react-router-dom";
 import CardActionArea from '@material-ui/core/CardActionArea';
 
-function update(){
-    return(
-        window.location.assign('/updatetask')
-    );
-}
-
 class TaskCard extends React.Component{
 
-    constructor(props){
-        super(props);
-    }
     render() {
         return(
           <div className="TaskCard">
-              <CardActionArea  component={Link} to={{pathname: '/updatetask', state:{
+              <Card>
+                  <CardActionArea  component={Link} to={{pathname: '/updatetask', state:{
                           description : this.props.description,
                           status : this.props.status,
                           responsible : this.props.responsible,
@@ -38,9 +30,10 @@ class TaskCard extends React.Component{
                           </Typography>
                       </CardContent>
                   </CardActionArea>
+              </Card>
           </div>
         );
     }
 }
 
-export default TaskCard; 
+export default TaskCard;
